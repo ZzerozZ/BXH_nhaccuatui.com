@@ -1,0 +1,106 @@
+﻿<Window x:Class="MP3.ZING_Music.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:pos="01"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MP3.ZING_Music"
+        mc:Ignorable="d"
+        Title="Bảng xếp hạng âm nhạc - nhaccuatui.com" Height="700" Width="500"
+        MinHeight="430" MinWidth="300"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="MainStyle.xaml"></ResourceDictionary>
+    </Window.Resources>
+
+    <Border BorderBrush="DarkBlue" BorderThickness="1 1 1 2">
+        <Grid>
+            <local:SongPlayer x:Name="UCSongPlayer" Visibility="Hidden"></local:SongPlayer>
+            <Grid x:Name="grdTop10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!--Main control-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <ToggleButton x:Name="tgbVN" Click="ToggleButton_Click1" Height="30">BXH VN</ToggleButton>
+                    <ToggleButton x:Name="tgbUSUK" Click="ToggleButton_Click2" Grid.Column="1">BXH US-UK</ToggleButton>
+                    <ToggleButton x:Name="tgbKpop" Click="ToggleButton_Click3" Grid.Column="2">BXH K-Pop</ToggleButton>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <!--Top 10 songs-->
+
+
+                    <ListBox x:Name="lbSongs"  HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid PreviewMouseDown="Grid_PreviewMouseDown" Tag="{Binding Url}">
+                                    <Border Height="50" BorderThickness="0 0 0 1" BorderBrush="Aqua">
+                                        <Grid Height="50" HorizontalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Pos}" FontSize="15" Foreground="OrangeRed" FontWeight="SemiBold"></TextBlock>
+                                            <Grid Grid.Column="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+                                                <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="SemiBold" Foreground="DarkBlue"></TextBlock>
+                                                <TextBlock Text="{Binding Singer}" FontStyle="Italic" Grid.Row="1" Foreground="LightSeaGreen"></TextBlock>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+
+                                </Grid>
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="btnPlayAll" Grid.Column="0" 
+                            BorderThickness="0 1 0 1" Click="btnPlayAll_Click">Play all songs</Button>
+                    
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="btnOpenInBrowser" Grid.Column="0" 
+                            BorderThickness="0 1 1 0" Click="btnOpenInBrowser_Click">Open in browser</Button>
+                        <Button x:Name="btnReload" Grid.Column="1" 
+                            BorderThickness="0 1 0 0" Click="btnReload_Click">Reload</Button>
+
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Border>
+
+
+
+
+</Window>
